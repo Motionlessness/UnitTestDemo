@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 namespace BankAccount
 {
     public class Account
-    { 
-        private double _balance;
-
+    {
         /// <summary>
         /// deposits the amount in the bank account and returns the new balance
         /// </summary>
@@ -17,15 +15,32 @@ namespace BankAccount
         /// <returns></returns>
         public double Deposit(double amt)
         {
-            _balance += amt;
-            return _balance;
+            if (amt <= 0)
+            {
+                throw new ArgumentException($"{nameof(amt)} must be a positive amount");
+            }
+            if (amt >= 10000)
+            {
+                throw new ArgumentException($"{nameof(amt)} must be smaller than 10,000");
+            }
+
+            Balance += amt;
+            return Balance;
         }
 
          public double Withdraw(double amt)
          {
-            _balance -= amt;
-            return _balance;
+            if (amt > Balance) {
+                throw new ArgumentException("You cannot withdraw more than the current balance");
+            }
+            if (amt <= 0)
+            {
+                throw new ArgumentException($"{nameof(amt)} must be a positive amount");
+            }
+            Balance -= amt;
+            return Balance;
          }
-            
+
+        public double Balance { get; private set; }
     }
 }
