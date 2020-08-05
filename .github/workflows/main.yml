@@ -25,8 +25,11 @@ jobs:
     - name: Setup MSBuild Path
       uses: warrenbuckley/Setup-MSBuild@v1
 
-    - name: Setup NuGeet
+    - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0.2
+
+    - name: Restore Nuget
+      run: nuget restore BankAccount.sln
 
     - name: Build App
       uses: msbuild BankAccount.sln /p:Configuration=Release
