@@ -32,7 +32,7 @@ jobs:
       run: nuget restore BankAccount.sln
 
     - name: Build App
-      uses: msbuild BankAccount.sln /p:Configuration=Release
+      run: msbuild BankAccount.sln /p:Configuration=Release
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v2
